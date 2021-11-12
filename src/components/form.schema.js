@@ -18,6 +18,13 @@ const formSchema = yup.object().shape({
     instructions: yup
         .string()
         .max(30, '30 characters max, please!')
+    ,    
+    pepperoni: yup.boolean(),
+    sausage: yup.boolean(),
+    bacon: yup.boolean(),
+    chicken: yup.boolean(),
+    onions: yup.boolean(),
+    olives: yup.boolean(),
     
 })
 

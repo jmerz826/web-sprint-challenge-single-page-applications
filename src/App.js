@@ -1,9 +1,30 @@
 import React, {useState, useEffect} from "react";
-import { Route, Link, Switch } from "react-router-dom";
+import { Route, Link, Switch, useHistory } from "react-router-dom";
 import PizzaForm from './components/pizzaForm';
 import formSchema from "./components/form.schema";
 import axios from "axios";
 import * as yup from 'yup';
+import styled from 'styled-components';
+import ConfirmationPage from "./components/confirmationPage";
+
+const StyledHeader = styled.div`
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  nav{
+    width:20%;
+    display:flex;
+    justify-content:space-evenly;
+  }
+
+  nav a{
+    text-decoration: none;
+    background-color: greenyellow;
+    padding: 4%;
+    border-radius:10px;
+  }
+`
 
 const initialFormValues = {
   name: '',
@@ -37,6 +58,11 @@ const App = () => {
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [order, setOrder] = useState([]);
   const [disabled, setDisabled] = useState(initialDisabled);
+  const history = useHistory();
+
+  const routeToConfirmation = () => {
+        history.push('/confirmation');
+  }
   
   const validate = (name, value) => {
     yup.reach(formSchema, name).validate(value)
@@ -65,25 +91,29 @@ const App = () => {
       onions: formValues.onions,
       olives: formValues.olives,
     }
-
-    axios.post('https://reqres.in/api/orders', newPizza)
-      .then(res => setOrder([res.data, ...order]))
-      .catch(err => console.error(err))
-      .finally(setFormValues(initialFormValues))
+    routeToConfirmation();
   }
 
   useEffect(() => {
     formSchema.isValid(formValues).then(valid => setDisabled(!valid));
   }, [formValues])
 
+  useEffect(() => {
+    axios.get('https://reqres.in/api/orders')
+      .then(res => console.log(res))
+      .catch(err => console.error(err))
+  }, [formValues])
+
   return (
     <>
-      <h1>Lambda Eats</h1>
-      <nav>
-        <Link to='/'>Home</Link>
-        <Link to='/pizza'>Pizza!</Link>
-        <Link to='/help'>Help</Link>
-      </nav>
+      <StyledHeader>
+        <h1>Lambda Eats</h1>
+        <nav>
+          <Link to='/'>Home</Link>
+          <Link to='/pizza'>Pizza!</Link>
+          <Link to='/help'>Help</Link>
+        </nav>
+      </StyledHeader>
 
       <Switch>
         <Route path='/pizza'>
@@ -97,6 +127,11 @@ const App = () => {
         </Route>
         <Route path='/help'>
           <h3>Hit up @austen on twitter for help</h3>
+        </Route>
+        <Route path='/confirmation'>
+          <ConfirmationPage>
+            order={order}
+          </ConfirmationPage>
         </Route>
         <Route exact path='/'>
           <h2>Home Page chillin!</h2>

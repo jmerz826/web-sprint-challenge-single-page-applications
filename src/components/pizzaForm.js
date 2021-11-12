@@ -53,6 +53,7 @@ const StyledFormDiv = styled.div`
 
 const PizzaForm = (props) => {
     const { values, errors, onChange, disabled } = props;
+    
 
     const change = (evt) => {        
         const { name, value, type, checked } = evt.target;
@@ -180,8 +181,10 @@ const PizzaForm = (props) => {
                         onChange={change}
                     />
                 </label>
-                <button disabled={disabled} id='order-button'>Add 🍕 to Order! </button>
-
+                <button
+                    disabled={disabled}
+                    id='order-button'
+                >Add 🍕 to Order! </button>
             </form>
 
         </StyledFormDiv>
