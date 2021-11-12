@@ -14,6 +14,11 @@ const formSchema = yup.object().shape({
     sauce: yup
         .string()
         .oneOf(['marinara', 'bbq', 'alfredo'])
+    ,
+    instructions: yup
+        .string()
+        .max(30, '30 characters max, please!')
+    
 })
 
 export default formSchema;

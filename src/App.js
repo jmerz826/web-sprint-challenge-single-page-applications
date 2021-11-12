@@ -3,6 +3,7 @@ import { Route, Link, Switch } from "react-router-dom";
 import PizzaForm from './components/pizzaForm';
 import formSchema from "./components/form.schema";
 import axios from "axios";
+import * as yup from 'yup';
 
 const initialFormValues = {
   name: '',
@@ -26,6 +27,7 @@ const initialFormErrors = {
   size: '',
   sauce: '',
   toppings: '',
+  instructions: ''
 }
 
 const initialDisabled = true;
@@ -36,7 +38,14 @@ const App = () => {
   const [order, setOrder] = useState([]);
   const [disabled, setDisabled] = useState(initialDisabled);
   
+  const validate = (name, value) => {
+    yup.reach(formSchema, name).validate(value)
+      .then(() => setFormErrors({ ...formErrors, [name]: '' }))
+      .catch(err => setFormErrors({...formErrors, [name]: err.errors[0]}))
+  }
+
   const onChange = (name, value) => {
+    validate(name, value);
     setFormValues({...formValues, [name]: value})
   }
 

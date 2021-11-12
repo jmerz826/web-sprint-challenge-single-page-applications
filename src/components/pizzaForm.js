@@ -43,6 +43,11 @@ const StyledFormDiv = styled.div`
     button{
         margin-top: 10%;
     }
+
+    .error-text{
+        text-transform: uppercase;
+        color:yellow;
+    }
     
 `
 
@@ -60,7 +65,8 @@ const PizzaForm = (props) => {
             <h2>Design your Pizza!</h2>
             <h4>Our pizza is cooked fresh to order!</h4>
             <form id='pizza-form'>
-                <h3>Your Name <span>{errors.name}</span></h3>
+                <h3>Your Name </h3>
+                <span className='error-text'>{errors.name}</span>
                     <input
                         name='name'
                         type='text'
@@ -69,7 +75,8 @@ const PizzaForm = (props) => {
                         onChange={change}
                     />
                 
-                <h3>Size <span>{errors.size }</span></h3>
+                <h3>Size</h3>
+                <span className='error-text'>{errors.size }</span>
                     <select
                         onChange={change}
                         value={values.size}
@@ -82,7 +89,8 @@ const PizzaForm = (props) => {
                         <option value='extra-large'>Extra Large (18")</option>
                     </select>
                 
-                <h3>Sauce <span>{errors.sauce}</span></h3>
+                <h3>Sauce</h3>
+                <span className='error-text'>{errors.sauce}</span>
                     <label> Marinara
                         <input
                             type='radio'
@@ -110,7 +118,8 @@ const PizzaForm = (props) => {
                             checked={values.sauce === 'alfredo' }
                         />
                     </label>
-                <h3>Add Toppings (optional) <span>{errors.toppings}</span></h3>
+                <h3>Add Toppings (optional)</h3>
+                <span className='error-text'>{errors.toppings}</span>
                     <div id='toppings-list'>
                         <label> Pepperoni
                             <input
@@ -162,6 +171,7 @@ const PizzaForm = (props) => {
                         </label>
                     </div>
                 <h3>Special Instructions</h3>
+                <span className='error-text'>{errors.instructions}</span>
                 <label>
                     <input
                         type='text'
