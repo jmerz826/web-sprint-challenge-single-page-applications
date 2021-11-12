@@ -91,18 +91,27 @@ const App = () => {
       onions: formValues.onions,
       olives: formValues.olives,
     }
-    routeToConfirmation();
+
+    axios.post('https://reqres.in/api/orders', newPizza)
+      .then(res => {
+        setOrder([res.data, ...order])
+      })
+      .catch(err => console.error(err))
+      .finally(() => {
+        setFormValues(initialFormValues);
+        routeToConfirmation();
+      })
   }
 
   useEffect(() => {
     formSchema.isValid(formValues).then(valid => setDisabled(!valid));
   }, [formValues])
 
-  useEffect(() => {
-    axios.get('https://reqres.in/api/orders')
-      .then(res => console.log(res))
-      .catch(err => console.error(err))
-  }, [formValues])
+  // useEffect(() => {
+  //   axios.get('https://reqres.in/api/orders')
+  //     .then(res => console.log(res))
+  //     .catch(err => console.error(err))
+  // }, [formValues])
 
   return (
     <>
@@ -134,7 +143,8 @@ const App = () => {
           </ConfirmationPage>
         </Route>
         <Route exact path='/'>
-          <h2>Home Page chillin!</h2>
+          <h2>Home Page!</h2>
+          <Link to="/pizza" id="order-pizza">Order Pizza</Link>
         </Route>
       </Switch>
     </>

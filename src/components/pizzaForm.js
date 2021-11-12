@@ -52,7 +52,7 @@ const StyledFormDiv = styled.div`
 `
 
 const PizzaForm = (props) => {
-    const { values, errors, onChange, disabled } = props;
+    const { values, errors, onChange, disabled, submit } = props;
     
 
     const change = (evt) => {        
@@ -65,7 +65,7 @@ const PizzaForm = (props) => {
         <StyledFormDiv>
             <h2>Design your Pizza!</h2>
             <h4>Our pizza is cooked fresh to order!</h4>
-            <form id='pizza-form'>
+            <form id='pizza-form' onSubmit={submit}>
                 <h3>Your Name </h3>
                 <span className='error-text'>{errors.name}</span>
                     <input
@@ -81,7 +81,8 @@ const PizzaForm = (props) => {
                     <select
                         onChange={change}
                         value={values.size}
-                        name='size'
+                    name='size'
+                    id='size-dropdown'
                     >
                         <option value=''>-- Select Pizza Size --</option>
                         <option value='small'>Small (10")</option>
@@ -179,11 +180,13 @@ const PizzaForm = (props) => {
                         name='instructions'
                         value={values.instructions}
                         onChange={change}
+                        id='special-text'
                     />
                 </label>
                 <button
                     disabled={disabled}
                     id='order-button'
+                    type='submit'
                 >Add 🍕 to Order! </button>
             </form>
 
