@@ -4,12 +4,22 @@ import PizzaForm from './components/pizzaForm';
 
 const initialFormValues = {
   name: '',
-  size: ''
+  size: '',
+  sauce: '',
+  toppings: '',
 };
+
+const initialFormErrors = {
+  name: '',
+  size: '',
+  sauce: '',
+  toppings: '',
+}
 
 
 const App = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
   
   const onChange = (name, value) => {
     setFormValues({...formValues, [name]: value})
@@ -28,6 +38,7 @@ const App = () => {
         <Route path='/pizza'>
           <PizzaForm
             values={formValues}
+            errors={formErrors}
             onChange={onChange}
           />
         </Route>
