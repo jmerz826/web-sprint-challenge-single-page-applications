@@ -39,6 +39,10 @@ const StyledFormDiv = styled.div`
         flex-direction:column;
         align-items:center;
     }
+
+    button{
+        margin-top: 10%;
+    }
     
 `
 
@@ -157,7 +161,16 @@ const PizzaForm = (props) => {
                             />
                         </label>
                     </div>
-                <button disabled={disabled}>Place Order! 🍕</button>
+                <h3>Special Instructions</h3>
+                <label>
+                    <input
+                        type='text'
+                        name='instructions'
+                        value={values.instructions}
+                        onChange={change}
+                    />
+                </label>
+                <button disabled={disabled} id='order-button'>Add 🍕 to Order! </button>
 
             </form>
 

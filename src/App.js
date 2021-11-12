@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { Route, Link, Switch } from "react-router-dom";
 import PizzaForm from './components/pizzaForm';
 import formSchema from "./components/form.schema";
+import axios from "axios";
 
 const initialFormValues = {
   name: '',
@@ -16,6 +17,8 @@ const initialFormValues = {
   chicken: false,
   onions: false,
   olives: false,
+
+  instructions: ''
 };
 
 const initialFormErrors = {
@@ -53,13 +56,16 @@ const App = () => {
       onions: formValues.onions,
       olives: formValues.olives,
     }
-    setOrder(newPizza);
-    setFormValues(initialFormValues);
+
+    axios.post('https://reqres.in/api/orders', newPizza)
+      .then(res => setOrder([res.data, ...order]))
+      .catch(err => console.error(err))
+      .finally(setFormValues(initialFormValues))
   }
 
-  // useEffect(() => {
-  //   schema.isValid(formValues).then(valid => setDisabled(!valid));
-  // }, [formValues])
+  useEffect(() => {
+    formSchema.isValid(formValues).then(valid => setDisabled(!valid));
+  }, [formValues])
 
   return (
     <>
@@ -83,7 +89,7 @@ const App = () => {
         <Route path='/help'>
           <h3>Hit up @austen on twitter for help</h3>
         </Route>
-        <Route path exact='/'>
+        <Route exact path='/'>
           <h2>Home Page chillin!</h2>
         </Route>
       </Switch>
