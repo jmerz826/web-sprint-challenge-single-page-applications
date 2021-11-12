@@ -5,7 +5,7 @@ const StyledFormDiv = styled.div`
     
     display:flex;
     flex-direction:column;
-    background-color: gray;
+    /* background-color: gray; */
     align-items:center;
 
     h3{

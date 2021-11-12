@@ -26,6 +26,26 @@ const StyledHeader = styled.div`
   }
 `
 
+const StyledHomePhoto = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  img{
+    width: 50%;
+  }
+
+  a{
+    text-decoration: none;
+    font-size:2rem;
+    color: black;
+    background-color: greenyellow;
+    padding:1%;
+    margin-top: 2%;
+  }
+`
+
 const initialFormValues = {
   name: '',
   size: '',
@@ -135,7 +155,8 @@ const App = () => {
           />
         </Route>
         <Route path='/help'>
-          <h3>Hit up @austen on twitter for help</h3>
+          <h3>Contact <a href='https://twitter.com/Austen' target='_blank'>@austen</a> on <a href='https://twitter.com/' target='_blank'>twitter</a> for help</h3>
+          <a href='https://twitter.com/Austen' target='_blank'><img src='https://pbs.twimg.com/profile_images/1430366450053652480/uRMrWCcc_400x400.jpg' alt='Austen twitter pic' /></a>
         </Route>
         <Route path='/confirmation'>
           <ConfirmationPage>
@@ -144,7 +165,10 @@ const App = () => {
         </Route>
         <Route exact path='/'>
           <h2>Home Page!</h2>
-          <Link to="/pizza" id="order-pizza">Order Pizza</Link>
+          <StyledHomePhoto>
+          <img id='home-page-photo' src='https://images.pexels.com/photos/1115251/pexels-photo-1115251.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' alt='Restaurants in a city'/>
+          <Link to="/pizza" id="order-pizza">Order Pizza!</Link>
+          </StyledHomePhoto>
         </Route>
       </Switch>
     </>
