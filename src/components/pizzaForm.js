@@ -2,10 +2,23 @@ import React from "react";
 import styled from 'styled-components';
 
 const StyledFormDiv = styled.div`
+    
     display:flex;
     flex-direction:column;
     background-color: gray;
     align-items:center;
+
+    h3{
+        width:100%;
+        text-align:center;
+        margin-bottom:5%;
+        padding-bottom:2%;
+        border-bottom: 2px dashed black;
+    }
+
+    h4{
+        margin-top: 0;
+    }
     
     /* BACKGROUND IMAGE */
     background-image: url('https://cdn.pixabay.com/photo/2017/12/10/14/47/pizza-3010062_960_720.jpg');
@@ -17,12 +30,20 @@ const StyledFormDiv = styled.div`
         display:flex;
         flex-direction: column;
         align-items: center;
+        background-color: rgba(255, 20, 20, 0.42);
+        padding: 2% 10%;
+    }
+
+    #toppings-list{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
     }
     
 `
 
 const PizzaForm = (props) => {
-    const { values, errors, onChange } = props;
+    const { values, errors, onChange, disabled } = props;
 
     const change = (evt) => {        
         const { name, value, type, checked } = evt.target;
@@ -33,8 +54,9 @@ const PizzaForm = (props) => {
     return (
         <StyledFormDiv>
             <h2>Design your Pizza!</h2>
+            <h4>Our pizza is cooked fresh to order!</h4>
             <form id='pizza-form'>
-                <label>Your Name <span>{errors.name}</span></label>
+                <h3>Your Name <span>{errors.name}</span></h3>
                     <input
                         name='name'
                         type='text'
@@ -43,7 +65,7 @@ const PizzaForm = (props) => {
                         onChange={change}
                     />
                 
-                <label>Size <span>{errors.size }</span></label>
+                <h3>Size <span>{errors.size }</span></h3>
                     <select
                         onChange={change}
                         value={values.size}
@@ -56,7 +78,7 @@ const PizzaForm = (props) => {
                         <option value='extra-large'>Extra Large (18")</option>
                     </select>
                 
-                <label>Sauce <span>{errors.sauce}</span></label>
+                <h3>Sauce <span>{errors.sauce}</span></h3>
                     <label> Marinara
                         <input
                             type='radio'
@@ -84,9 +106,58 @@ const PizzaForm = (props) => {
                             checked={values.sauce === 'alfredo' }
                         />
                     </label>
-                <label>Add Toppings (optional) <span>{errors.toppings}</span></label>
-
-
+                <h3>Add Toppings (optional) <span>{errors.toppings}</span></h3>
+                    <div id='toppings-list'>
+                        <label> Pepperoni
+                            <input
+                                type='checkbox'
+                                name='pepperoni'
+                                onChange={change}
+                                checked={values.pepperoni}
+                            />
+                        </label>
+                        <label> Sausage
+                            <input
+                                type='checkbox'
+                                name='sausage'
+                                onChange={change}
+                                checked={values.sausage}
+                            />
+                        </label>
+                        <label> Bacon
+                            <input
+                                type='checkbox'
+                                name='bacon'
+                                onChange={change}
+                                checked={values.bacon}
+                            />
+                        </label>
+                        <label> Grilled Chicken
+                            <input
+                                type='checkbox'
+                                name='chicken'
+                                onChange={change}
+                                checked={values.chicken}
+                            />
+                        </label>
+                        <label> Red Onions
+                            <input
+                                type='checkbox'
+                                name='onions'
+                                onChange={change}
+                                checked={values.onions}
+                            />
+                        </label>
+                        <label> Black Olives
+                            <input
+                                type='checkbox'
+                                name='olives'
+                                onChange={change}
+                                checked={values.olives}
+                            />
+                        </label>
+                    </div>
+                <button disabled={disabled}>Place Order! 🍕</button>
 
             </form>
 
