@@ -6,6 +6,12 @@ const StyledConfimationMessage = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
+    
+
+    img {
+        height: 50vh;
+        border: 3px solid black;
+    }
 `
 
 const ConfirmationPage = (props) => {
@@ -25,7 +31,9 @@ const ConfirmationPage = (props) => {
                 {order[0].olives ? 'Black Olives ' : ''}
                 {order[0].chicken ? 'Grilled Chicken ' : ''}
             </h3>
-            <h3>Special instructions: {order[0].instructions }</h3>
+            <h3>Special instructions: {order[0].instructions}</h3>
+            <img src='https://images.pexels.com/photos/784631/pexels-photo-784631.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' alt='rolling dough'/>
+            <h4>Preparing your order now!</h4>
 
         </StyledConfimationMessage>
     )
