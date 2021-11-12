@@ -1,8 +1,20 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Route, Link, Switch } from "react-router-dom";
-import PizzaForm from './components/pizzaForm'
+import PizzaForm from './components/pizzaForm';
+
+const initialFormValues = {
+  name: '',
+  size: ''
+};
+
 
 const App = () => {
+  const [formValues, setFormValues] = useState(initialFormValues);
+  
+  const onChange = (name, value) => {
+    setFormValues({...formValues, [name]: value})
+  }
+
   return (
     <>
       <h1>Lambda Eats</h1>
@@ -14,9 +26,10 @@ const App = () => {
 
       <Switch>
         <Route path='/pizza'>
-          <PizzaForm>
-
-          </PizzaForm>
+          <PizzaForm
+            values={formValues}
+            onChange={onChange}
+          />
         </Route>
         <Route path='/help'>
           <h3>Hit up @austen on twitter for help</h3>
