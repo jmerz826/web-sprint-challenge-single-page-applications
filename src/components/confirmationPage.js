@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// Styling for the page
 const StyledConfimationMessage = styled.div`
     background-color: greenyellow;
     display:flex;

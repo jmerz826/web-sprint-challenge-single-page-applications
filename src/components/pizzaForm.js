@@ -46,17 +46,19 @@ const StyledFormDiv = styled.div`
 
     .error-text{
         text-transform: uppercase;
-        color:yellow;
+        color:red;
     }
     
 `
 
 const PizzaForm = (props) => {
+    // Declare these variables inherited from props. Easier than writing 'props.xxx' over and over
     const { values, errors, onChange, disabled, submit } = props;
     
-
+    // Invoked upon each change in the form. Reaches up to App for the prop 'onChange'
     const change = (evt) => {        
         const { name, value, type, checked } = evt.target;
+        // Deals with checkbox inputs slightly differently than others
         const newValue = type === 'checkbox' ? checked : value;
         onChange(name, newValue);
     }
