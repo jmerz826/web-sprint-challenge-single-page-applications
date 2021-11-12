@@ -1,11 +1,11 @@
 import React from "react";
 import styled from 'styled-components';
 
+// Form styling
 const StyledFormDiv = styled.div`
     
     display:flex;
     flex-direction:column;
-    /* background-color: gray; */
     align-items:center;
 
     h3{
@@ -30,7 +30,7 @@ const StyledFormDiv = styled.div`
         display:flex;
         flex-direction: column;
         align-items: center;
-        background-color: rgba(255, 20, 20, 0.42);
+        background-color: rgba(224, 255, 225, 0.7);
         padding: 2% 10%;
     }
 
