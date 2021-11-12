@@ -110,6 +110,8 @@ const App = () => {
       chicken: formValues.chicken,
       onions: formValues.onions,
       olives: formValues.olives,
+
+      instructions: formValues.instructions
     }
 
     axios.post('https://reqres.in/api/orders', newPizza)
@@ -145,6 +147,9 @@ const App = () => {
       </StyledHeader>
 
       <Switch>
+      <Route path='/confirmation'>
+          <ConfirmationPage order={order}/>
+      </Route>
         <Route path='/pizza'>
           <PizzaForm
             values={formValues}
