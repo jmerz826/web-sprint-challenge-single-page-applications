@@ -6,6 +6,9 @@ describe('Lambda Eats App', () => {
     const nameInput = () => cy.get('input[name=name]');
     const pepperoniInput = () => cy.get('input[name=pepperoni');
     const baconInput = () => cy.get('input[name=bacon]');
+    const sizeInput = () => cy.get('select[id="size-dropdown"]');
+    const sauceInput = () => cy.get('input[type=radio]');
+    const submitBtn = () => cy.get('button[id="order-button"]')
 
     it('cypress functionality tests', () => {
         expect(2 + 2).to.equal(4);
@@ -23,5 +26,12 @@ describe('Lambda Eats App', () => {
             baconInput().check().should('be.checked');
         })
     })
-    
+    describe('page submission', () => {
+        it('can submit page', () => {
+            nameInput().type('asdf');
+            sizeInput().select('medium');
+            sauceInput().first().check();
+            submitBtn().click();
+        })
+    })
 })
